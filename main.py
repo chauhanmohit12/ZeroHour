@@ -103,7 +103,8 @@ async def create_timer(interaction: discord.Interaction,appid: str):
 def run_bot():
     client.run(TOKEN)
     
-# ---- Flask server ----
+# ------------------ Flask Web Server ------------------
+
 app = Flask(__name__)
 
 @app.route("/")
@@ -111,11 +112,13 @@ def home():
     return "Bot is running"
 
 def run_web():
-    port = int(os.environ.get("PORT", 10000))
+    port = int(os.environ.get("PORT", 10000))  # Render provides PORT
     app.run(host="0.0.0.0", port=port)
 
-# run both
+# ------------------ Run Both ------------------
+
 if __name__ == "__main__":
-    t1 = threading.Thread(target=run_bot)
-    t1.start()
+    bot_thread = threading.Thread(target=run_bot)
+    bot_thread.start()
+
     run_web()
