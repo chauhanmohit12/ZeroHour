@@ -4,6 +4,8 @@ import asyncio
 import time
 import requests
 from datetime import datetime,timezone
+import os
+from dotenv import load_dotenv
 
 def seconds_from_utc(date_str: str) -> int:
     # Parse the input date
@@ -23,7 +25,8 @@ def seconds_from_utc(date_str: str) -> int:
 
     return int(diff_seconds)
 
-TOKEN = "MTQ3OTgzMDI5MzA5MDI3NTM5OA.GBU8vM.iWKPc3XN6aSVdTBDrvhti0M8rfvtgJ1KD1Hp04"
+load_dotenv()
+TOKEN = os.getenv("DISCORD_TOKEN")
 
 class Client(discord.Client):
     def __init__(self):
