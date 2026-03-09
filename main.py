@@ -68,9 +68,9 @@ async def create_timer(interaction: discord.Interaction,appid: str):
         title=name,
         url="https://store.steampowered.com/app/"+appid,
         description=(
-            f"**Releasing: <t:{end_time}:R>**"
+            f"**Release time: <t:{end_time}:R>**"
         ),
-        color=discord.Color.gold()
+        color=discord.Color.blue()
     )
     
     embed.set_thumbnail(url="https://images-ext-1.discordapp.net/external/hyGUpE441sdRq43OcsqHXnTUi3I0oUXnt10rOB2maSg/https/cdn.discordapp.com/emojis/1073161249006821406.webp?format=webp&width=160&height=160")
@@ -80,25 +80,6 @@ async def create_timer(interaction: discord.Interaction,appid: str):
 
     # send response
     await interaction.response.send_message(embed=embed)
-
-    # fetch the sent message
-    message = await interaction.original_response()
-
-    # wait for timer
-    await asyncio.sleep(seconds)
-
-    finished_embed = discord.Embed(
-        title=name,
-        url="https://store.steampowered.com/app/"+appid,
-        color=discord.Color.gold()
-    )
-    
-    finished_embed.set_thumbnail(url="https://images-ext-1.discordapp.net/external/hyGUpE441sdRq43OcsqHXnTUi3I0oUXnt10rOB2maSg/https/cdn.discordapp.com/emojis/1073161249006821406.webp?format=webp&width=160&height=160")
-    finished_embed.add_field(name="About", value=description, inline=False)
-    finished_embed.set_image(url=banner)
-
-    # edit the message
-    await message.edit(embed=finished_embed)
 
 def run_bot():
     client.run(TOKEN)
@@ -122,3 +103,4 @@ if __name__ == "__main__":
     bot_thread.start()
 
     run_web()
+
