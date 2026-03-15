@@ -12,15 +12,15 @@ import threading
 
 def seconds_from_utc(date_str: str) -> int:
     """
-    Takes a date like '19 Mar, 2026'
-    Returns seconds between current UTC time
+    Takes a date like '02 Mar, 2026'
+    Returns number of seconds between current UTC time
     and 12:01 AM UTC of that date.
     """
 
-    # Parse the date
-    parsed_date = datetime.strptime(date_str, "%d, %b, %Y")
+    # Parse the input date
+    parsed_date = datetime.strptime(date_str, "%d %b, %Y")
 
-    # Set time to 12:01 AM
+    # Set time to 12:01 AM (00:01)
     target_time = parsed_date.replace(hour=0, minute=1, second=0, microsecond=0)
 
     # Make it UTC aware
@@ -30,7 +30,9 @@ def seconds_from_utc(date_str: str) -> int:
     now = datetime.now(timezone.utc)
 
     # Difference in seconds
-    return int((target_time - now).total_seconds())
+    diff_seconds = (target_time - now).total_seconds()
+
+    return int(diff_seconds)
 
 load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
@@ -107,5 +109,3 @@ if __name__ == "__main__":
     bot_thread.start()
 
     run_web()
-
-
