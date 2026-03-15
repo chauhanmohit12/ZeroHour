@@ -12,13 +12,13 @@ import threading
 
 def seconds_from_utc(date_str: str) -> int:
     """
-    Takes a date like 'Mar 19, 2026'
+    Takes a date like '19 Mar, 2026'
     Returns seconds between current UTC time
     and 12:01 AM UTC of that date.
     """
 
     # Parse the date
-    parsed_date = datetime.strptime(date_str, "%b %d, %Y")
+    parsed_date = datetime.strptime(date_str, "%d, %b, %Y")
 
     # Set time to 12:01 AM
     target_time = parsed_date.replace(hour=0, minute=1, second=0, microsecond=0)
